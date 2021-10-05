@@ -1,5 +1,6 @@
 try:
     import os
+    import sys
     import platform
 except Exception as eImp:
     print(f"Ocurrió el siguiente ERROR de importación: {eImp}")
@@ -104,7 +105,13 @@ class tkClass(extraMethods):
         file.close()
 
 def core():
-    tkEs()
+    lenargv= len(sys.argv)
+
+    if lenargv== 2:
+        if sys.argv[1]== "--tk":
+            tkEs()
+    else:
+        pass
 
 if __name__== "__main__":
     try:
