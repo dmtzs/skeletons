@@ -29,5 +29,7 @@
 This project is for build a basic standard structure for flask and tkinter developments. More improvements will be added in this reposirory in order to become better this little project. <br><br>
 Please feel free to do a pull request if its neccessary and I will review your pull request to accept it.
 
-## Installation, libraries and considerations
-Will be added with the time
+## Specifications
+* This application uses python 3
+* Tkinter is used for the GUI
+* Pyinstaller for creating the executable
