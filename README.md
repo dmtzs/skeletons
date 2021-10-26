@@ -1,4 +1,11 @@
 <p align="center">
+  <span align="left">
+    <img width="200" height="250" src="https://github.com/dmtzs/skeletons/blob/master/Assets/readme/flask-removebg-preview.png" alt="Flask img">
+  </span>
+
+  <span align="right">
+    <img width="200" src="https://github.com/dmtzs/skeletons/blob/master/Assets/readme/tkinter-logo-removebg-preview.png" alt="Tkinter img">
+  </span>
   <!--img width="200" src="https://github.com/dmtzs/DownYoutube/blob/master/ytImage.png"-->
   <h1 align="center" style="margin: 0 auto 0 auto;">Flask and tkinter skeletons</h1>
   <h5 align="center" style="margin: 0 auto 0 auto;">create a standard structure for your flazk and tkinter developments</h5>
