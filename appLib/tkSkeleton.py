@@ -24,6 +24,7 @@ if __name__== "__main__":
     import sys
     import platform
     import tkinter as tk
+    from tkinter.constants import CENTER
 except ImportError as eImp:
     print(f"Ocurrió el siguiente error de importación: {eImp}")
 
@@ -74,12 +75,12 @@ class tkClass(extraMethods):
 
         #Label title of the application
         titleLabel= tk.Label(ven, fg= "red", text= self.labelTitleApp, font= ("jost", 25))
-        titleLabel.place(x= 102, y= 5)
+        titleLabel.place(relx= 0.5, y= 25, anchor= CENTER)
 
         ven.mainloop()
         '''
 
-        arrFiles= ["tkMain.py", "tkMethods.py"]
+        arrFiles= ["tkMain.py", "tkMethods.py", "__init__.py"]
 
         os.mkdir("./biblios")
 
@@ -88,7 +89,10 @@ class tkClass(extraMethods):
                 file= open(arrFiles[arch], "wt", encoding="utf8")
                 file.write(contenido1)
             else:
-                file= open(f"./biblios/{arrFiles[arch]}", "wt", encoding= "utf8")
-                file.write(contenido2)
+                if "__init__" in arrFiles[arch]:
+                    file= open(f"./biblios/{arrFiles[arch]}", "wt", encoding= "utf8")
+                else:
+                    file= open(f"./biblios/{arrFiles[arch]}", "wt", encoding= "utf8")
+                    file.write(contenido2)
             
             file.close()
