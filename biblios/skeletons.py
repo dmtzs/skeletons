@@ -85,7 +85,7 @@ class tkClass(extraMethods):
 
         contenido3= '__all__= ["tkMethods"]'
 
-        return contenido1, contenido2, contenido3
+        return [contenido1, contenido2, contenido3]
 
     def flaskContent(self):
         contRunApp= '''try:
@@ -163,17 +163,25 @@ def index():
 </body>
 </html>'''
 
+        contFooters= '''<footer class="bg-dark absolute-bottom">
+    Platform or project name &copy; Diego Martínez {{now.day}}-{{now.strftime("%B")}}-{{now.year}}
+</footer>
+
+<script src="{{url_for('static', filename= 'css/bootstrap/js/bootstrap.js')}}"></script>'''
+
+        return [contRunApp, contInit, contRoutes, contLayoutHtml, contFooters]
+
 class Files(Contents):
     pathToKeep= ""
     projectName= ""
 
     def tkFiles(self):
         arrFiles= ["tkMain.py", "tkMethods.py", "__init__.py"]
-        arrContent= ["", "", ""]
+        arrContent= []
         mainProjectPath= f"{self.pathToKeep}/{self.projectName}"
         libFolder= "biblios"
 
-        arrContent[0], arrContent[1], arrContent[2]= self.tkContent()
+        arrContent= self.tkContent()
 
         os.makedirs(f"{mainProjectPath}/{libFolder}")
 
@@ -193,7 +201,15 @@ class Files(Contents):
             file.close()
 
     def flaskFiles(self):
-        pass
+        arrFiles= [("runApp.py", "app"),#Main path
+                   ("__init__.py", "routes.py", "admin_routes.py", "templates", "static"),#Inside app folder
+                   ("layout.html", "includes"),#Inside templates folder
+                   ("navbar.html", "footer.html"),# Inside includes folder
+                   ("css", "img")]#Inside static folder
+        arrContent= []
+        mainProjectPath= f"{self.pathToKeep}/{self.projectName}"
+
+        arrContent= self.flaskContent()
 
     def coreFiles(self, projectType, pathToKeep, projectName):
         self.pathToKeep= pathToKeep
