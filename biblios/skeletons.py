@@ -88,7 +88,80 @@ class tkClass(extraMethods):
         return contenido1, contenido2, contenido3
 
     def flaskContent(self):
-        pass
+        contRunApp= '''try:
+    from app import app
+    from gevent.pywsgi import WSGIServer
+except ImportError as eImp:
+    print(f"The following import ERROR occurred: {eImp}")
+
+if __name__== "__main__":
+    try:
+        # -----------------Dev mode-----------------
+        app.run(host= "127.0.0.1", port= 5000, debug= True)
+        # debug= True for apply changes made into the files without restarting the flask server
+
+        # -----------------Prod mode----------------
+        #appServer= WSGIServer(("127.0.0.1", 5000), app)
+        #appServer.serve_forever()
+    except Exception as ex:
+        print(f"The following ERROR ocurred: {ex}")
+    finally:
+        print("Finishing program")'''
+
+        contInit= '''try:
+    from flask import Flask
+except ImportError as eImp:
+    print(f"The following import ERROR occurred: {eImp}")
+
+app= Flask(__name__)
+
+from app import routes, admin_routes'''
+        
+        contRoutes= '''try:
+    import datetime as dt
+    from app import app
+    from flask import render_template
+except ImportError as eImp:
+    print(f"The following import ERROR occurred: {eImp}")
+
+# -------------Context processor-------------
+@app.context_processor
+def dateNow():
+    return {
+        "now": dt.datetime.utcnow()
+    }
+
+# -------------Endpoints-------------
+@app.route("/")# Welcome HTML template
+def index():
+    return render_template("welcome.html", pageTitle= "Home")'''
+
+        contLayoutHtml= '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/bootstrap/css/bootstrap.css')}}" type="text/css" />
+	<link rel="stylesheet" href="{{url_for('static', filename= 'css/PerStyles.css')}}" type="text/css" />
+    <title>{% block title %}{% endblock %}</title>
+    
+</head>
+
+<body>
+    {% include "includes/navbar.html" %}
+
+    {% if imgback %}
+        {% include "includes/backgroundStyle.html" %}
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    {% include "includes/footers.html" %}
+    
+</body>
+</html>'''
 
 class Files(Contents):
     pathToKeep= ""
