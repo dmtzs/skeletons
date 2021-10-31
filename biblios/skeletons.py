@@ -1,7 +1,10 @@
-import os
+try:
+    import os
+except ImportError as eImp:
+    print(f"The following error ocurred: {eImp}")
 
-class tkContent():
-    def tkEs(self):
+class Contents():
+    def tkContent(self):
         contenido1= '''try:
     from biblios import tkMethods
 except Exception as eImp:
@@ -80,19 +83,50 @@ class tkClass(extraMethods):
         ven.mainloop()
         '''
 
-        arrFiles= ["tkMain.py", "tkMethods.py", "__init__.py"]
+        contenido3= '__all__= ["tkMethods"]'
 
-        os.mkdir("./biblios")
+        return contenido1, contenido2, contenido3
+
+    def flaskContent(self):
+        pass
+
+class Files(Contents):
+    pathToKeep= ""
+    projectName= ""
+
+    def tkFiles(self):
+        arrFiles= ["tkMain.py", "tkMethods.py", "__init__.py"]
+        arrContent= ["", "", ""]
+        mainProjectPath= f"{self.pathToKeep}/{self.projectName}"
+        libFolder= "biblios"
+
+        arrContent[0], arrContent[1], arrContent[2]= self.tkContent()
+
+        os.makedirs(f"{mainProjectPath}/{libFolder}")
 
         for arch in range(len(arrFiles)):
             if arch== 0:
-                file= open(arrFiles[arch], "wt", encoding="utf8")
-                file.write(contenido1)
+                file= open(f"{mainProjectPath}/{arrFiles[arch]}", "wt", encoding="utf8")
+                file.write(arrContent[0])
+
             else:
+                file= open(f"{mainProjectPath}/{libFolder}/{arrFiles[arch]}", "wt", encoding= "utf8")
+
                 if "__init__" in arrFiles[arch]:
-                    file= open(f"./biblios/{arrFiles[arch]}", "wt", encoding= "utf8")
+                    file.write(arrContent[2])
                 else:
-                    file= open(f"./biblios/{arrFiles[arch]}", "wt", encoding= "utf8")
-                    file.write(contenido2)
+                    file.write(arrContent[1])
             
             file.close()
+
+    def flaskFiles(self):
+        pass
+
+    def coreFiles(self, projectType, pathToKeep, projectName):
+        self.pathToKeep= pathToKeep
+        self.projectName= projectName
+
+        if projectType== "tkinter":
+            self.tkFiles()
+        else:
+            self.flaskFiles()
