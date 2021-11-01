@@ -75,12 +75,9 @@ class tkClass(extraMethods):
         #     ven.iconbitmap(self.fileIco)
         screenWidth = ven.winfo_screenwidth()# Ancho del área de visualización
         screenHeight = ven.winfo_screenheight()# Alto del área de visualización
-        if sis== "Windows":
-            width= 500
-            height= 550
-        else:
-            width= 1000
-            height= 1050
+        
+        width= 500
+        height= 550
         left = (screenWidth - width) / 2
         top = (screenHeight - height) / 2
         ven.geometry(f"{int(width)}x{int(height)}+{int(left)}+{int(top)}")
