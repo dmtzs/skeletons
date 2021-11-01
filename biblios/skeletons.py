@@ -187,18 +187,15 @@ class Files(Contents):
 
         for arch in range(len(arrFiles)):
             if arch== 0:
-                file= open(f"{mainProjectPath}/{arrFiles[arch]}", "wt", encoding="utf8")
-                file.write(arrContent[0])
+                with open(f"{mainProjectPath}/{arrFiles[arch]}", "wt", encoding="utf8") as file:
+                    file.write(arrContent[0])
 
             else:
-                file= open(f"{mainProjectPath}/{libFolder}/{arrFiles[arch]}", "wt", encoding= "utf8")
-
-                if "__init__" in arrFiles[arch]:
-                    file.write(arrContent[2])
-                else:
-                    file.write(arrContent[1])
-            
-            file.close()
+                with open(f"{mainProjectPath}/{libFolder}/{arrFiles[arch]}", "wt", encoding= "utf8") as file:
+                    if "__init__" in arrFiles[arch]:
+                        file.write(arrContent[2])
+                    else:
+                        file.write(arrContent[1])
 
     def flaskFiles(self):
         arrFiles= [("runApp.py", "app"),#Main path
@@ -206,8 +203,48 @@ class Files(Contents):
                    ("layout.html", "includes"),#Inside templates folder
                    ("navbar.html", "footer.html"),# Inside includes folder
                    ("css", "img")]#Inside static folder
-        arrContent= []
+        arrContent= [] #contRunApp, contInit, contRoutes, contLayoutHtml, contFooters
         mainProjectPath= f"{self.pathToKeep}/{self.projectName}"
+        cont= 0
+
+        os.makedirs(mainProjectPath)
+
+        for direc in arrFiles:
+            for elem in direc:
+                if cont== 0:
+                    tempPath= f"{mainProjectPath}/{elem}"
+                    if ".py" in elem or ".html" in elem:
+                        with open(tempPath, "wt", encoding= "utf8") as file:
+                            file.write(arrContent[0])
+                    else:
+                        os.makedirs(tempPath)
+
+                elif cont== 1:
+                    tempPath= f"{mainProjectPath}/app/{elem}"
+                    if ".py" in elem or ".html" in elem:
+                        if arrFiles[1][0]== elem:
+                            with open(tempPath, "wt", encoding= "utf8") as file:
+                                file.write(arrContent[1])
+
+                        elif arrFiles[1][1]== elem:
+                            with open(tempPath, "wt", encoding= "utf8") as file:
+                                file.write(arrContent[2])
+
+                        elif arrFiles[1][2]== elem:
+                            with open(tempPath, "wt", encoding= "utf8") as file:
+                                file.write("#admin routes")
+                    else:
+                        os.makedirs(tempPath)
+
+                elif cont== 2:
+                    pass
+
+                elif cont== 3:
+                    pass
+
+                elif cont== 4:
+                    pass
+            cont+= 1
 
         arrContent= self.flaskContent()
 
