@@ -92,6 +92,7 @@ class tkClass(extraMethods):
 
         # Button for keep the file
         saveEntry= tk.Button(ven, width= 10, bg= "#179A93", fg= "white", text= "Ruta", command= abrirRuta)
+        saveEntry.focus()
         saveEntry.place(x= 10, y= 90)
 
         # Label for show the path selected
@@ -130,7 +131,7 @@ class tkClass(extraMethods):
         lenguajeEs.place(x= 395, y= 30)
 
         # Apply button
-        applyBut= tk.Button(ven, fg= "white", width= 10, bg= "#179A93", text= "Apply", takefocus= False, command= makeProjectCore)
+        applyBut= tk.Button(ven, fg= "white", width= 10, bg= "#179A93", text= "Apply", command= makeProjectCore)
         applyBut.place(relx= 0.5, y= 240, anchor= CENTER)
 
         # Label to github repository
