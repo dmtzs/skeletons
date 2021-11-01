@@ -8,7 +8,7 @@
   </span>
   <!--img width="200" src="https://github.com/dmtzs/DownYoutube/blob/master/ytImage.png"-->
   <h1 align="center" style="margin: 0 auto 0 auto;">Flask and tkinter skeletons</h1>
-  <h5 align="center" style="margin: 0 auto 0 auto;">Create a standard structure for your flazk and tkinter developments</h5>
+  <h5 align="center" style="margin: 0 auto 0 auto;">Create a standard structure for your flask and tkinter developments</h5>
 </p>
 
 <p align="center">
