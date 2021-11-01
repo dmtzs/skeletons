@@ -207,6 +207,8 @@ class Files(Contents):
         mainProjectPath= f"{self.pathToKeep}/{self.projectName}"
         cont= 0
 
+        arrContent= self.flaskContent()
+
         os.makedirs(mainProjectPath)
 
         for direc in arrFiles:
@@ -237,14 +239,29 @@ class Files(Contents):
                         os.makedirs(tempPath)
 
                 elif cont== 2:
-                    pass
+                    tempPath= f"{mainProjectPath}/app/templates/{elem}"
+                    if ".py" in elem or ".html" in elem:
+                        with open(tempPath, "wt", encoding= "utf8") as file:
+                            file.write(arrContent[3])
+                    else:
+                        os.makedirs(tempPath)
 
                 elif cont== 3:
-                    pass
+                    tempPath= f"{mainProjectPath}/app/templates/includes/{elem}"
+                    if arrFiles[3][0]== elem:
+                        with open(tempPath, "wt", encoding= "utf8") as file:
+                            file.write("{# your navbar code here #}")
+                    else:
+                        with open(tempPath, "wt", encoding= "utf8") as file:
+                            file.write("{# your footer code here #}")
 
                 elif cont== 4:
-                    pass
+                    tempPath= f"{mainProjectPath}/app/static/{elem}"
+                    os.makedirs(tempPath)
             cont+= 1
+        tempPath= f"{mainProjectPath}/app/static/css/PerStyles.css"
+        with open(tempPath, "wt") as file:
+            file.write("/*Your css code here*/")
 
         arrContent= self.flaskContent()
 
