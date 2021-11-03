@@ -136,6 +136,14 @@ def dateNow():
 def index():
     return render_template("welcome.html", pageTitle= "Home")'''
 
+        contAdminRoutes= '''try:
+    from flask import render_template
+except ImportError as eImp:
+    print(f"Ocurrió el error de importación: {eImp}")
+
+# ------------------Admin routes------------------
+# Below define your admin routes'''
+
         contLayoutHtml= '''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -169,7 +177,7 @@ def index():
 
 <script src="{{url_for('static', filename= 'css/bootstrap/js/bootstrap.js')}}"></script>'''
 
-        return [contRunApp, contInit, contRoutes, contLayoutHtml, contFooters]
+        return [contRunApp, contInit, contRoutes, contAdminRoutes, contLayoutHtml, contFooters]
 
 class Files(Contents):
     pathToKeep= ""
@@ -234,7 +242,7 @@ class Files(Contents):
 
                         elif arrFiles[1][2]== elem:
                             with open(tempPath, "wt", encoding= "utf8") as file:
-                                file.write("#admin routes")
+                                file.write(arrContent[3])
                     else:
                         os.makedirs(tempPath)
 
@@ -242,7 +250,7 @@ class Files(Contents):
                     tempPath= f"{mainProjectPath}/app/templates/{elem}"
                     if ".py" in elem or ".html" in elem:
                         with open(tempPath, "wt", encoding= "utf8") as file:
-                            file.write(arrContent[3])
+                            file.write(arrContent[4])
                     else:
                         os.makedirs(tempPath)
 
@@ -254,6 +262,7 @@ class Files(Contents):
                     else:
                         with open(tempPath, "wt", encoding= "utf8") as file:
                             file.write("{# your footer code here #}")
+                            file.write(arrContent[5])
 
                 elif cont== 4:
                     tempPath= f"{mainProjectPath}/app/static/{elem}"
