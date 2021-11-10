@@ -8,7 +8,7 @@ class Contents():
         contenido1= '''try:
     from biblios import tkMethods
 except Exception as eImp:
-    print(f"Ocurrió el siguiente ERROR de importación: {eImp}")
+    print(f"The following import ERROR occurred in {__file__}: {eImp}")
     
 if __name__== "__main__":
     try:
@@ -29,7 +29,7 @@ if __name__== "__main__":
     import tkinter as tk
     from tkinter.constants import CENTER
 except ImportError as eImp:
-    print(f"Ocurrió el siguiente error de importación: {eImp}")
+    print(f"The following import ERROR occurred in {__file__}: {eImp}")
 
 # -----------------Other methods-----------------
 class extraMethods():
@@ -92,7 +92,7 @@ class tkClass(extraMethods):
     from app import app
     from gevent.pywsgi import WSGIServer
 except ImportError as eImp:
-    print(f"The following import ERROR occurred: {eImp}")
+    print(f"The following import ERROR occurred in {__file__}: {eImp}")
 
 if __name__== "__main__":
     try:
@@ -103,15 +103,15 @@ if __name__== "__main__":
         # -----------------Prod mode----------------
         #appServer= WSGIServer(("127.0.0.1", 5000), app)
         #appServer.serve_forever()
-    except Exception as ex:
-        print(f"The following ERROR ocurred: {ex}")
+    except Exception as eImp:
+        print(f"The following import ERROR occurred in {__file__}: {eImp}")
     finally:
         print("Finishing program")'''
 
         contInit= '''try:
     from flask import Flask
 except ImportError as eImp:
-    print(f"The following import ERROR occurred: {eImp}")
+    print(f"The following import ERROR occurred in {__file__}: {eImp}")
 
 app= Flask(__name__)
 
@@ -122,7 +122,7 @@ from app import routes, admin_routes'''
     from app import app
     from flask import render_template
 except ImportError as eImp:
-    print(f"The following import ERROR occurred: {eImp}")
+    print(f"The following import ERROR occurred in {__file__}: {eImp}")
 
 # -------------Context processor-------------
 @app.context_processor
@@ -139,7 +139,7 @@ def index():
         contAdminRoutes= '''try:
     from flask import render_template
 except ImportError as eImp:
-    print(f"Ocurrió el error de importación: {eImp}")
+    print(f"The following import ERROR occurred in {__file__}: {eImp}")
 
 # ------------------Admin routes------------------
 # Below define your admin routes'''
