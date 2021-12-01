@@ -24,12 +24,25 @@ class extraMethods():
         else:
             return "clear", sistema
 
-    def validarCampos(self):
-        if self.banderas[0]== 0:
+    def validarCampos(self, bande, bandeComp):
+        if self.banderas[bande] == 0 and bandeComp == 0:
             messagebox.showerror("ERROR", "Por favor selecciona una ruta válida")
+        
+        elif self.banderas[bande] == 0 and bandeComp == 1:
+            messagebox.showerror("ERROR", "El nombre del proyecto no puede estar vacío")
 
     def repoGit(self):
         webbrowser.open("https://github.com/dmtzs/skeletons")
+
+    def validate_flags(self, componentName):
+        if componentName == "":
+            return 0
+        
+        elif componentName.isspace():
+            return 0
+
+        else:
+            return 1
 
 # -----------------Tkinter widgets methods-----------------
 class tkClass(extraMethods):
@@ -37,10 +50,16 @@ class tkClass(extraMethods):
     titleApp= "Skeletons" # Title in the upper part of the main frame
     labelTitleApp= "Skeletons" # Title in the label
     folderName= ""
-    banderas= [0]
+    banderas= [0, 0]
 
     # -----------------Main window and their components-----------------
     def GUI(self):
+        def validate_project_name(*args):
+            proName= nomProjectEntryText.get()
+
+            self.banderas[1]= self.validate_flags(proName)
+            self.validarCampos(1, 1)
+
         def abrirRuta():
             self.folderName= filedialog.askdirectory()
             if len(self.folderName) > 1:
@@ -52,7 +71,7 @@ class tkClass(extraMethods):
                 color= "red"
                 self.banderas[0]= 0
             
-            #self.validarCampos() #Descomentar cuando ya se vaya en esta etapa.
+            self.validarCampos(0, 0) #Descomentar cuando ya se vaya en esta etapa.
             pathProjectLabel.config(text= texto, fg= color)
 
         def makeProjectCore():
@@ -107,7 +126,7 @@ class tkClass(extraMethods):
         nomProjectEntryText= tk.StringVar()
         nomProjectEntry= tk.Entry(ven, width= 30, textvariable= nomProjectEntryText)
         nomProjectEntry.place(x= 168, y= 142)
-        #nomProjectEntryText.trace_add()
+        nomProjectEntryText.trace_add("write", validate_project_name)
         nomProjectEntryText.set("project")
 
         # Label for choose the kind of the project.
