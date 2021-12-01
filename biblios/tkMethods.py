@@ -75,11 +75,17 @@ class tkClass(extraMethods):
             pathProjectLabel.config(text= texto, fg= color)
 
         def makeProjectCore():
-            project= skeletons.Files()
-            opSelected= valComb.get()
-            nameSeted= nomProjectEntryText.get()
+            if 0 in self.banderas:
+                messagebox.showerror("ERROR", "Por favor, valida los campos que se deben de llenar en el formulario")
+            
+            else:
+                project= skeletons.Files()
+                opSelected= valComb.get()
+                nameSeted= nomProjectEntryText.get()
 
-            project.coreFiles(opSelected, self.folderName, nameSeted)
+                project.coreFiles(opSelected, self.folderName, nameSeted)
+
+                messagebox.showinfo("Éxito", "El proyecto fue creado con éxito, verifícalo en el lugar donde decidiste crearlo")
 
         ven= tk.Tk()
         comando, sis= self.commandSOShell()
