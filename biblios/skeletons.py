@@ -81,7 +81,7 @@ except Exception as e_imp:
     
 if __name__== "__main__":
     try:
-        met= tk_methods.tkClass()
+        met= tk_methods.TkClass()
         met.GUI()
     except Exception as ex:
         print(f"Ocurrió el ERROR: {ex}")
@@ -115,7 +115,7 @@ class extraMethods():
             return "clear", sistema
 
 # -----------------Tkinter widgets methods-----------------
-class tkClass(extraMethods):
+class TkClass(extraMethods):
     fileIco= "name.ico"
     titleApp= "" # Title in the upper part of the main frame
     labelTitleApp= "" # Title in the label
@@ -284,14 +284,14 @@ class Files(Contents):
 
         os.makedirs(f"{main_project_path}/{lib_folder}")
 
-        for arch in range(len(arr_files)):
-            if arch == 0:
-                with open(f"{main_project_path}/{arr_files[arch]}", "wt", encoding="utf8") as file:
+        for index, arch in enumerate(arr_files):
+            if index == 0:
+                with open(f"{main_project_path}/{arch}", "wt", encoding="utf8") as file:
                     file.write(arr_content[0])
 
             else:
-                with open(f"{main_project_path}/{lib_folder}/{arr_files[arch]}", "wt", encoding= "utf8") as file:
-                    if "__init__" in arr_files[arch]:
+                with open(f"{main_project_path}/{lib_folder}/{arch}", "wt", encoding= "utf8") as file:
+                    if "__init__" in arch:
                         file.write(arr_content[2])
                     else:
                         file.write(arr_content[1])
