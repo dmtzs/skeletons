@@ -4,7 +4,7 @@ except ImportError as eImp:
     print(f"The following error ocurred: {eImp}")
 
 class Contents():
-    def flaskApiContent(self):
+    def flask_api_content(self):
         cont_run_app= '''try:
     from app import app
     from gevent.pywsgi import WSGIServer
@@ -73,7 +73,7 @@ def admin_index():
 
         return [cont_run_app, cont_init, cont_routes, cont_adminroutes]
 
-    def tkContent(self):
+    def tk_content(self):
         contenido1= '''try:
     from biblios import tk_methods
 except Exception as eImp:
@@ -156,8 +156,8 @@ class tkClass(extraMethods):
 
         return [contenido1, contenido2, contenido3]
 
-    def flaskContent(self):
-        contRunApp= '''try:
+    def flask_content(self):
+        cont_run_app= '''try:
     from app import app
     from gevent.pywsgi import WSGIServer
 except ImportError as eImp:
@@ -177,7 +177,7 @@ if __name__== "__main__":
     finally:
         print("Finishing program")'''
 
-        contInit= '''try:
+        cont_init= '''try:
     from flask import Flask
 except ImportError as eImp:
     print(f"The following import ERROR occurred in {__file__}: {eImp}")
@@ -186,7 +186,7 @@ app= Flask(__name__)
 
 from app import routes, admin_routes'''
         
-        contRoutes= '''try:
+        cont_routes= '''try:
     import datetime as dt
     from app import app
     from flask import render_template
@@ -205,7 +205,7 @@ def dateNow():
 def index():
     return render_template("welcome.html", pageTitle= "Home")'''
 
-        contAdminRoutes= '''try:
+        cont_admin_routes= '''try:
     from flask import render_template
 except ImportError as eImp:
     print(f"The following import ERROR occurred in {__file__}: {eImp}")
@@ -213,7 +213,7 @@ except ImportError as eImp:
 # ------------------Admin routes------------------
 # Below define your admin routes'''
 
-        contLayoutHtml= '''<!DOCTYPE html>
+        cont_layout_html= '''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -240,25 +240,25 @@ except ImportError as eImp:
 </body>
 </html>'''
 
-        contFooters= '''<footer class="bg-dark absolute-bottom">
+        cont_footers= '''<footer class="bg-dark absolute-bottom">
     Platform or project name &copy; Diego Martínez {{now.day}}-{{now.strftime("%B")}}-{{now.year}}
 </footer>
 
 <script src="{{url_for('static', filename= 'css/bootstrap/js/bootstrap.js')}}"></script>'''
 
-        return [contRunApp, contInit, contRoutes, contAdminRoutes, contLayoutHtml, contFooters]
+        return [cont_run_app, cont_init, cont_routes, cont_admin_routes, cont_layout_html, cont_footers]
 
 class Files(Contents):
-    pathToKeep= ""
-    projectName= ""
+    path_to_keep= ""
+    project_name= ""
 
     def flask_api_files(self):
         arrFiles= [("run_app.py", "app"),#Main path
                    ("__init__.py", "routes.py", "admin_routes.py")]# Inside app folder
         arrContent= []
-        mainProjectPath= f"{self.pathToKeep}/{self.projectName}"
+        mainProjectPath= f"{self.path_to_keep}/{self.project_name}"
 
-        arrContent= self.flaskApiContent()
+        arrContent= self.flask_api_content()
 
         os.makedirs(mainProjectPath)
 
@@ -279,10 +279,10 @@ class Files(Contents):
     def tk_files(self):
         arrFiles= ["tk_main.py", "tk_methods.py", "__init__.py"]
         arrContent= []
-        mainProjectPath= f"{self.pathToKeep}/{self.projectName}"
+        mainProjectPath= f"{self.path_to_keep}/{self.project_name}"
         libFolder= "biblios"
 
-        arrContent= self.tkContent()
+        arrContent= self.tk_content()
 
         os.makedirs(f"{mainProjectPath}/{libFolder}")
 
@@ -305,10 +305,10 @@ class Files(Contents):
                    ("navbar.html", "footer.html"),# Inside includes folder
                    ("css", "img")]#Inside static folder
         arrContent= [] #contRunApp, contInit, contRoutes, contLayoutHtml, contFooters
-        mainProjectPath= f"{self.pathToKeep}/{self.projectName}"
+        mainProjectPath= f"{self.path_to_keep}/{self.project_name}"
         cont= 0
 
-        arrContent= self.flaskContent()
+        arrContent= self.flask_content()
 
         os.makedirs(mainProjectPath)
 
@@ -365,11 +365,11 @@ class Files(Contents):
         with open(tempPath, "wt") as file:
             file.write("/*Your css code here*/")
 
-        arrContent= self.flaskContent()
+        arrContent= self.flask_content()
 
-    def coreFiles(self, projectType, pathToKeep, projectName):
-        self.pathToKeep= pathToKeep
-        self.projectName= projectName
+    def coreFiles(self, projectType, path_to_keep, project_name):
+        self.path_to_keep= path_to_keep
+        self.project_name= project_name
 
         if projectType == "tkinter":
             self.tk_files()
