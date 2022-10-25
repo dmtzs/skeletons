@@ -7,11 +7,11 @@ try:
     from biblios import skeletons
     from tkinter.constants import CENTER
     from tkinter import filedialog, messagebox, ttk
-except ImportError as eImp:
-    print(f"Ocurrió el siguiente error de importación: {eImp}")
+except ImportError as e_imp:
+    print(f"Ocurrió el siguiente error de importación: {e_imp}")
 
 # -----------------Other methods-----------------
-class extraMethods():
+class ExtraMethods():
     def resource_path(self, relative_path):
         base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
         return os.path.join(base_path, relative_path)
@@ -45,7 +45,7 @@ class extraMethods():
             return 1
 
 # -----------------Tkinter widgets methods-----------------
-class tkClass(extraMethods):
+class TkClass(ExtraMethods):
     fileIco= "name.ico"
     titleApp= "Skeletons" # Title in the upper part of the main frame
     labelTitleApp= "Skeletons" # Title in the label

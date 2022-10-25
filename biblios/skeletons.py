@@ -1,15 +1,15 @@
 try:
     import os
-except ImportError as eImp:
-    print(f"The following error ocurred: {eImp}")
+except ImportError as e_imp:
+    print(f"The following error ocurred: {e_imp}")
 
 class Contents():
     def flask_api_content(self):
         cont_run_app= '''try:
     from app import app
     from gevent.pywsgi import WSGIServer
-except ImportError as eImp:
-    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+except ImportError as e_imp:
+    print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 if __name__== "__main__":
     try:
@@ -20,15 +20,15 @@ if __name__== "__main__":
         # -----------------Prod mode----------------
         #appServer= WSGIServer(("127.0.0.1", 5000), app)
         #appServer.serve_forever()
-    except Exception as eImp:
-        print(f"The following import ERROR occurred in {__file__}: {eImp}")
+    except Exception as e_imp:
+        print(f"The following import ERROR occurred in {__file__}: {e_imp}")
     finally:
         print("Finishing program")'''
 
         cont_init= '''try:
     from flask import Flask
-except ImportError as eImp:
-    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+except ImportError as e_imp:
+    print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 app = Flask(__name__)
 
@@ -37,8 +37,8 @@ from app import routes, admin_routes'''
         cont_routes= '''try:
     from app import app
     from flask import request, jsonify, make_response
-except ImportError as eImp:
-    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+except ImportError as e_imp:
+    print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 # -------------Endpoints-------------
 @app.route("/index", methods= ["GET"])
@@ -55,8 +55,8 @@ def index():
     from app import app
     from flask import request, jsonify, make_response
     from werkzeug.security import generate_password_hash, check_password_hash
-except ImportError as eImp:
-    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+except ImportError as e_imp:
+    print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 # ------------------Admin routes------------------
 
@@ -76,8 +76,8 @@ def admin_index():
     def tk_content(self):
         contenido1= '''try:
     from biblios import tk_methods
-except Exception as eImp:
-    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+except Exception as e_imp:
+    print(f"The following import ERROR occurred in {__file__}: {e_imp}")
     
 if __name__== "__main__":
     try:
@@ -97,8 +97,8 @@ if __name__== "__main__":
     import platform
     import tkinter as tk
     from tkinter.constants import CENTER
-except ImportError as eImp:
-    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+except ImportError as e_imp:
+    print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 # -----------------Other methods-----------------
 class extraMethods():
@@ -160,8 +160,8 @@ class tkClass(extraMethods):
         cont_run_app= '''try:
     from app import app
     from gevent.pywsgi import WSGIServer
-except ImportError as eImp:
-    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+except ImportError as e_imp:
+    print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 if __name__== "__main__":
     try:
@@ -172,15 +172,15 @@ if __name__== "__main__":
         # -----------------Prod mode----------------
         #appServer= WSGIServer(("127.0.0.1", 5000), app)
         #appServer.serve_forever()
-    except Exception as eImp:
-        print(f"The following import ERROR occurred in {__file__}: {eImp}")
+    except Exception as e_imp:
+        print(f"The following import ERROR occurred in {__file__}: {e_imp}")
     finally:
         print("Finishing program")'''
 
         cont_init= '''try:
     from flask import Flask
-except ImportError as eImp:
-    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+except ImportError as e_imp:
+    print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 app= Flask(__name__)
 
@@ -190,8 +190,8 @@ from app import routes, admin_routes'''
     import datetime as dt
     from app import app
     from flask import render_template
-except ImportError as eImp:
-    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+except ImportError as e_imp:
+    print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 # -------------Context processor-------------
 @app.context_processor
@@ -207,8 +207,8 @@ def index():
 
         cont_admin_routes= '''try:
     from flask import render_template
-except ImportError as eImp:
-    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+except ImportError as e_imp:
+    print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 # ------------------Admin routes------------------
 # Below define your admin routes'''
@@ -253,50 +253,48 @@ class Files(Contents):
     project_name= ""
 
     def flask_api_files(self):
-        arrFiles= [("run_app.py", "app"),#Main path
+        arr_files= [("run_app.py", "app"),#Main path
                    ("__init__.py", "routes.py", "admin_routes.py")]# Inside app folder
-        arrContent= []
-        mainProjectPath= f"{self.path_to_keep}/{self.project_name}"
+        main_project_path= f"{self.path_to_keep}/{self.project_name}"
 
-        arrContent= self.flask_api_content()
+        arr_content = self.flask_api_content()
 
-        os.makedirs(mainProjectPath)
+        os.makedirs(main_project_path)
 
-        for main_index, direc in enumerate(arrFiles):
+        for main_index, direc in enumerate(arr_files):
             for index, elem in enumerate(direc):
                 if main_index == 0:
-                    tempPath= f"{mainProjectPath}/{elem}"
+                    temp_path= f"{main_project_path}/{elem}"
                     if ".py" in elem or ".html" in elem:
-                        with open(tempPath, "wt", encoding= "utf8") as file:
-                            file.write(arrContent[0])
+                        with open(temp_path, "wt", encoding= "utf8") as file:
+                            file.write(arr_content[0])
                     else:
-                        os.makedirs(tempPath)
+                        os.makedirs(temp_path)
                 elif main_index == 1:
-                    tempPath= f"{mainProjectPath}/app/{elem}"
-                    with open(tempPath, "wt", encoding= "utf8") as file:
-                        file.write(arrContent[index+1])
+                    temp_path = f"{main_project_path}/app/{elem}"
+                    with open(temp_path, "wt", encoding= "utf8") as file:
+                        file.write(arr_content[index+1])
 
     def tk_files(self):
-        arrFiles= ["tk_main.py", "tk_methods.py", "__init__.py"]
-        arrContent= []
-        mainProjectPath= f"{self.path_to_keep}/{self.project_name}"
-        libFolder= "biblios"
+        arr_files= ["tk_main.py", "tk_methods.py", "__init__.py"]
+        main_project_path= f"{self.path_to_keep}/{self.project_name}"
+        lib_folder= "biblios"
 
-        arrContent= self.tk_content()
+        arr_content = self.tk_content()
 
-        os.makedirs(f"{mainProjectPath}/{libFolder}")
+        os.makedirs(f"{main_project_path}/{lib_folder}")
 
-        for arch in range(len(arrFiles)):
-            if arch== 0:
-                with open(f"{mainProjectPath}/{arrFiles[arch]}", "wt", encoding="utf8") as file:
-                    file.write(arrContent[0])
+        for arch in range(len(arr_files)):
+            if arch == 0:
+                with open(f"{main_project_path}/{arr_files[arch]}", "wt", encoding="utf8") as file:
+                    file.write(arr_content[0])
 
             else:
-                with open(f"{mainProjectPath}/{libFolder}/{arrFiles[arch]}", "wt", encoding= "utf8") as file:
-                    if "__init__" in arrFiles[arch]:
-                        file.write(arrContent[2])
+                with open(f"{main_project_path}/{lib_folder}/{arr_files[arch]}", "wt", encoding= "utf8") as file:
+                    if "__init__" in arr_files[arch]:
+                        file.write(arr_content[2])
                     else:
-                        file.write(arrContent[1])
+                        file.write(arr_content[1])
 
     def flask_files(self):
         arrFiles= [("run_app.py", "app"),#Main path
@@ -304,76 +302,73 @@ class Files(Contents):
                    ("layout.html", "includes"),#Inside templates folder
                    ("navbar.html", "footer.html"),# Inside includes folder
                    ("css", "img")]#Inside static folder
-        arrContent= [] #contRunApp, contInit, contRoutes, contLayoutHtml, contFooters
-        mainProjectPath= f"{self.path_to_keep}/{self.project_name}"
+        main_project_path= f"{self.path_to_keep}/{self.project_name}"
         cont= 0
 
-        arrContent= self.flask_content()
+        arr_content= self.flask_content()
 
-        os.makedirs(mainProjectPath)
+        os.makedirs(main_project_path)
 
         for direc in arrFiles:
             for elem in direc:
                 if cont== 0:
-                    tempPath= f"{mainProjectPath}/{elem}"
+                    tempPath= f"{main_project_path}/{elem}"
                     if ".py" in elem or ".html" in elem:
                         with open(tempPath, "wt", encoding= "utf8") as file:
-                            file.write(arrContent[0])
+                            file.write(arr_content[0])
                     else:
                         os.makedirs(tempPath)
 
                 elif cont== 1:
-                    tempPath= f"{mainProjectPath}/app/{elem}"
+                    tempPath= f"{main_project_path}/app/{elem}"
                     if ".py" in elem or ".html" in elem:
                         if arrFiles[1][0]== elem:
                             with open(tempPath, "wt", encoding= "utf8") as file:
-                                file.write(arrContent[1])
+                                file.write(arr_content[1])
 
                         elif arrFiles[1][1]== elem:
                             with open(tempPath, "wt", encoding= "utf8") as file:
-                                file.write(arrContent[2])
+                                file.write(arr_content[2])
 
                         elif arrFiles[1][2]== elem:
                             with open(tempPath, "wt", encoding= "utf8") as file:
-                                file.write(arrContent[3])
+                                file.write(arr_content[3])
                     else:
                         os.makedirs(tempPath)
 
                 elif cont== 2:
-                    tempPath= f"{mainProjectPath}/app/templates/{elem}"
+                    tempPath= f"{main_project_path}/app/templates/{elem}"
                     if ".py" in elem or ".html" in elem:
                         with open(tempPath, "wt", encoding= "utf8") as file:
-                            file.write(arrContent[4])
+                            file.write(arr_content[4])
                     else:
                         os.makedirs(tempPath)
 
                 elif cont== 3:
-                    tempPath= f"{mainProjectPath}/app/templates/includes/{elem}"
+                    tempPath= f"{main_project_path}/app/templates/includes/{elem}"
                     if arrFiles[3][0]== elem:
                         with open(tempPath, "wt", encoding= "utf8") as file:
                             file.write("{# your navbar code here #}")
                     else:
                         with open(tempPath, "wt", encoding= "utf8") as file:
                             file.write("{# your footer code here #}")
-                            file.write(arrContent[5])
+                            file.write(arr_content[5])
 
                 elif cont== 4:
-                    tempPath= f"{mainProjectPath}/app/static/{elem}"
+                    tempPath= f"{main_project_path}/app/static/{elem}"
                     os.makedirs(tempPath)
             cont+= 1
-        tempPath= f"{mainProjectPath}/app/static/css/PerStyles.css"
+        tempPath= f"{main_project_path}/app/static/css/PerStyles.css"
         with open(tempPath, "wt") as file:
             file.write("/*Your css code here*/")
 
-        arrContent= self.flask_content()
-
-    def coreFiles(self, projectType, path_to_keep, project_name):
+    def coreFiles(self, project_type, path_to_keep, project_name):
         self.path_to_keep= path_to_keep
         self.project_name= project_name
 
-        if projectType == "tkinter":
+        if project_type == "tkinter":
             self.tk_files()
-        elif projectType == "flask":
+        elif project_type == "flask":
             self.flask_files()
-        elif projectType == "flask_api":
+        elif project_type == "flask_api":
             self.flask_api_files()
