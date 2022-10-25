@@ -5,7 +5,7 @@ except Exception as eImp:
     
 if __name__== "__main__":
     try:
-        met= tkMethods.tkClass()
+        met= tk_methods.tkClass()
         met.GUI()
     except Exception as ex:
         print(f"Ocurrió el ERROR: {ex}")

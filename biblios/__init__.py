@@ -1,1 +1,1 @@
-__all__= ["tkMethods"]
+__all__= ["tk_methods"]

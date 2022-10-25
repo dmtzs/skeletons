@@ -4,15 +4,84 @@ except ImportError as eImp:
     print(f"The following error ocurred: {eImp}")
 
 class Contents():
+    def flaskApiContent(self):
+        cont_run_app= '''try:
+    from app import app
+    from gevent.pywsgi import WSGIServer
+except ImportError as eImp:
+    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+
+if __name__== "__main__":
+    try:
+        # -----------------Dev mode-----------------
+        app.run(host= "127.0.0.1", port= 5000, debug= True)
+        # debug= True for apply changes made into the files without restarting the flask server
+
+        # -----------------Prod mode----------------
+        #appServer= WSGIServer(("127.0.0.1", 5000), app)
+        #appServer.serve_forever()
+    except Exception as eImp:
+        print(f"The following import ERROR occurred in {__file__}: {eImp}")
+    finally:
+        print("Finishing program")'''
+
+        cont_init= '''try:
+    from flask import Flask
+except ImportError as eImp:
+    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+
+app = Flask(__name__)
+
+from app import routes, admin_routes'''
+        
+        cont_routes= '''try:
+    from app import app
+    from flask import request, jsonify, make_response
+except ImportError as eImp:
+    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+
+# -------------Endpoints-------------
+@app.route("/index", methods= ["GET"])
+def index():
+    resp_code = 200
+    resp_json = {
+        "responseCode": resp_code,
+        "responseMessage": "Some message"
+    }
+    resp_json = make_response(jsonify(resp_json), resp_code)
+    return resp_json'''
+
+        cont_adminroutes= '''try:
+    from app import app
+    from flask import request, jsonify, make_response
+    from werkzeug.security import generate_password_hash, check_password_hash
+except ImportError as eImp:
+    print(f"The following import ERROR occurred in {__file__}: {eImp}")
+
+# ------------------Admin routes------------------
+
+# -------------Endpoints-------------
+@app.route("/admin_index", methods= ["GET"])
+def admin_index():
+    resp_code = 200
+    resp_json = {
+        "responseCode": resp_code,
+        "responseMessage": "Some message"
+    }
+    resp_json = make_response(jsonify(resp_json), resp_code)
+    return resp_json'''
+
+        return [cont_run_app, cont_init, cont_routes, cont_adminroutes]
+
     def tkContent(self):
         contenido1= '''try:
-    from biblios import tkMethods
+    from biblios import tk_methods
 except Exception as eImp:
     print(f"The following import ERROR occurred in {__file__}: {eImp}")
     
 if __name__== "__main__":
     try:
-        met= tkMethods.tkClass()
+        met= tk_methods.tkClass()
         met.GUI()
     except Exception as ex:
         print(f"Ocurrió el ERROR: {ex}")
@@ -83,7 +152,7 @@ class tkClass(extraMethods):
         ven.mainloop()
         '''
 
-        contenido3= '__all__= ["tkMethods"]'
+        contenido3= '__all__= ["tk_methods"]'
 
         return [contenido1, contenido2, contenido3]
 
@@ -183,8 +252,32 @@ class Files(Contents):
     pathToKeep= ""
     projectName= ""
 
-    def tkFiles(self):
-        arrFiles= ["tkMain.py", "tkMethods.py", "__init__.py"]
+    def flask_api_files(self):
+        arrFiles= [("run_app.py", "app"),#Main path
+                   ("__init__.py", "routes.py", "admin_routes.py")]# Inside app folder
+        arrContent= []
+        mainProjectPath= f"{self.pathToKeep}/{self.projectName}"
+
+        arrContent= self.flaskApiContent()
+
+        os.makedirs(mainProjectPath)
+
+        for main_index, direc in enumerate(arrFiles):
+            for index, elem in enumerate(direc):
+                if main_index == 0:
+                    tempPath= f"{mainProjectPath}/{elem}"
+                    if ".py" in elem or ".html" in elem:
+                        with open(tempPath, "wt", encoding= "utf8") as file:
+                            file.write(arrContent[0])
+                    else:
+                        os.makedirs(tempPath)
+                elif main_index == 1:
+                    tempPath= f"{mainProjectPath}/app/{elem}"
+                    with open(tempPath, "wt", encoding= "utf8") as file:
+                        file.write(arrContent[index+1])
+
+    def tk_files(self):
+        arrFiles= ["tk_main.py", "tk_methods.py", "__init__.py"]
         arrContent= []
         mainProjectPath= f"{self.pathToKeep}/{self.projectName}"
         libFolder= "biblios"
@@ -205,8 +298,8 @@ class Files(Contents):
                     else:
                         file.write(arrContent[1])
 
-    def flaskFiles(self):
-        arrFiles= [("runApp.py", "app"),#Main path
+    def flask_files(self):
+        arrFiles= [("run_app.py", "app"),#Main path
                    ("__init__.py", "routes.py", "admin_routes.py", "templates", "static"),#Inside app folder
                    ("layout.html", "includes"),#Inside templates folder
                    ("navbar.html", "footer.html"),# Inside includes folder
@@ -278,7 +371,9 @@ class Files(Contents):
         self.pathToKeep= pathToKeep
         self.projectName= projectName
 
-        if projectType== "tkinter":
-            self.tkFiles()
-        else:
-            self.flaskFiles()
+        if projectType == "tkinter":
+            self.tk_files()
+        elif projectType == "flask":
+            self.flask_files()
+        elif projectType == "flask_api":
+            self.flask_api_files()

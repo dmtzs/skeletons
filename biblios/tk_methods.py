@@ -140,7 +140,7 @@ class tkClass(extraMethods):
         projectLabelCombo.place(x= 10, y= 180)
 
         # Combobox with options for create a flask or tkinter project.
-        valuesArr= ["tkinter", "flask"]
+        valuesArr= ["tkinter", "flask", "flask_api"]
         valComb= tk.StringVar()
         valComb.set(valuesArr[0])
         projectCombo= ttk.Combobox(ven, values= valuesArr, state= "readonly", textvariable= valComb, width= 22)
