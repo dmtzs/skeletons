@@ -139,7 +139,7 @@ class TkClass(ExtraMethods):
         projectLabelCombo= tk.Label(ven, text= "Qué tipo de proyecto será?:", font= ("jost", 12))
         projectLabelCombo.place(x= 10, y= 180)
 
-        # Combobox with options for create a flask or tkinter project.
+        # Combobox with options to create a flask web application, flask API or tkinter project.
         valuesArr= ["tkinter", "flask_web", "flask_api"]
         valComb= tk.StringVar()
         valComb.set(valuesArr[0])
