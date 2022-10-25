@@ -31,7 +31,7 @@ class ExtraMethods():
         elif self.banderas[bande] == 0 and bandeComp == 1:
             messagebox.showerror("ERROR", "El nombre del proyecto no puede estar vacío")
 
-    def repoGit(self):
+    def repo_git(self):
         webbrowser.open("https://github.com/dmtzs/skeletons")
 
     def validate_flags(self, componentName):
@@ -164,7 +164,7 @@ class TkClass(ExtraMethods):
         labelGit.place(x= 130, y= 525)
 
         # Button to repository
-        butGit= tk.Button(ven, width= 10, bg= "#179A93", fg= "white", text= "Repositorio", takefocus= False, command= self.repoGit)
+        butGit= tk.Button(ven, width= 10, bg= "#179A93", fg= "white", text= "Repositorio", takefocus= False, command= self.repo_git)
         butGit.place(x= 290, y= 523)
 
         ven.mainloop()
