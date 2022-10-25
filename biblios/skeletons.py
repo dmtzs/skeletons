@@ -206,12 +206,18 @@ def index():
     return render_template("welcome.html", pageTitle= "Home")'''
 
         cont_admin_routes= '''try:
+    from app import app
     from flask import render_template
 except ImportError as e_imp:
     print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 # ------------------Admin routes------------------
-# Below define your admin routes'''
+# Below define your admin routes
+
+# -------------Endpoints-------------
+@app.route("/admin")# Admin index HTML template
+def index():
+    return render_template("welcome.html", pageTitle= "Home")'''
 
         cont_layout_html= '''<!DOCTYPE html>
 <html lang="en">
@@ -303,13 +309,13 @@ class Files(Contents):
                    ("navbar.html", "footer.html"),# Inside includes folder
                    ("css", "img")]#Inside static folder
         main_project_path= f"{self.path_to_keep}/{self.project_name}"
-        cont = 0
+        # cont = 0
 
         arr_content= self.flask_content()
 
         os.makedirs(main_project_path)
 
-        for direc in arr_files:
+        for cont, direc in enumerate(arr_files):
             for elem in direc:
                 if cont== 0:
                     temp_path= f"{main_project_path}/{elem}"
@@ -351,13 +357,13 @@ class Files(Contents):
                             file.write("{# your navbar code here #}")
                     else:
                         with open(temp_path, "wt", encoding= "utf8") as file:
-                            file.write("{# your footer code here #}")
+                            file.write("{# your footer code here #}\n")
                             file.write(arr_content[5])
 
                 elif cont== 4:
                     temp_path= f"{main_project_path}/app/static/{elem}"
                     os.makedirs(temp_path)
-            cont+= 1
+            # cont+= 1
         temp_path= f"{main_project_path}/app/static/css/PerStyles.css"
         with open(temp_path, "wt") as file:
             file.write("/*Your css code here*/")
