@@ -297,69 +297,69 @@ class Files(Contents):
                         file.write(arr_content[1])
 
     def flask_files(self):
-        arrFiles= [("run_app.py", "app"),#Main path
+        arr_files= [("run_app.py", "app"),#Main path
                    ("__init__.py", "routes.py", "admin_routes.py", "templates", "static"),#Inside app folder
                    ("layout.html", "includes"),#Inside templates folder
                    ("navbar.html", "footer.html"),# Inside includes folder
                    ("css", "img")]#Inside static folder
         main_project_path= f"{self.path_to_keep}/{self.project_name}"
-        cont= 0
+        cont = 0
 
         arr_content= self.flask_content()
 
         os.makedirs(main_project_path)
 
-        for direc in arrFiles:
+        for direc in arr_files:
             for elem in direc:
                 if cont== 0:
-                    tempPath= f"{main_project_path}/{elem}"
+                    temp_path= f"{main_project_path}/{elem}"
                     if ".py" in elem or ".html" in elem:
-                        with open(tempPath, "wt", encoding= "utf8") as file:
+                        with open(temp_path, "wt", encoding= "utf8") as file:
                             file.write(arr_content[0])
                     else:
-                        os.makedirs(tempPath)
+                        os.makedirs(temp_path)
 
                 elif cont== 1:
-                    tempPath= f"{main_project_path}/app/{elem}"
+                    temp_path= f"{main_project_path}/app/{elem}"
                     if ".py" in elem or ".html" in elem:
-                        if arrFiles[1][0]== elem:
-                            with open(tempPath, "wt", encoding= "utf8") as file:
+                        if arr_files[1][0]== elem:
+                            with open(temp_path, "wt", encoding= "utf8") as file:
                                 file.write(arr_content[1])
 
-                        elif arrFiles[1][1]== elem:
-                            with open(tempPath, "wt", encoding= "utf8") as file:
+                        elif arr_files[1][1]== elem:
+                            with open(temp_path, "wt", encoding= "utf8") as file:
                                 file.write(arr_content[2])
 
-                        elif arrFiles[1][2]== elem:
-                            with open(tempPath, "wt", encoding= "utf8") as file:
+                        elif arr_files[1][2]== elem:
+                            with open(temp_path, "wt", encoding= "utf8") as file:
                                 file.write(arr_content[3])
                     else:
-                        os.makedirs(tempPath)
+                        os.makedirs(temp_path)
 
                 elif cont== 2:
-                    tempPath= f"{main_project_path}/app/templates/{elem}"
+                    temp_path= f"{main_project_path}/app/templates/{elem}"
                     if ".py" in elem or ".html" in elem:
-                        with open(tempPath, "wt", encoding= "utf8") as file:
+                        with open(temp_path, "wt", encoding= "utf8") as file:
                             file.write(arr_content[4])
                     else:
-                        os.makedirs(tempPath)
+                        os.makedirs(temp_path)
 
                 elif cont== 3:
-                    tempPath= f"{main_project_path}/app/templates/includes/{elem}"
-                    if arrFiles[3][0]== elem:
-                        with open(tempPath, "wt", encoding= "utf8") as file:
+                    temp_path= f"{main_project_path}/app/templates/includes/{elem}"
+                    if arr_files[3][0]== elem:
+                        with open(temp_path, "wt", encoding= "utf8") as file:
                             file.write("{# your navbar code here #}")
                     else:
-                        with open(tempPath, "wt", encoding= "utf8") as file:
+                        with open(temp_path, "wt", encoding= "utf8") as file:
                             file.write("{# your footer code here #}")
                             file.write(arr_content[5])
 
                 elif cont== 4:
-                    tempPath= f"{main_project_path}/app/static/{elem}"
-                    os.makedirs(tempPath)
+                    temp_path= f"{main_project_path}/app/static/{elem}"
+                    os.makedirs(temp_path)
             cont+= 1
-        tempPath= f"{main_project_path}/app/static/css/PerStyles.css"
-        with open(tempPath, "wt") as file:
+        temp_path= f"{main_project_path}/app/static/css/PerStyles.css"
+        with open(temp_path, "wt") as file:
             file.write("/*Your css code here*/")
 
     def coreFiles(self, project_type, path_to_keep, project_name):
