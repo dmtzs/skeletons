@@ -83,7 +83,7 @@ class TkClass(ExtraMethods):
                 opSelected= valComb.get()
                 nameSeted= nomProjectEntryText.get()
 
-                project.coreFiles(opSelected, self.folderName, nameSeted)
+                project.core_files(opSelected, self.folderName, nameSeted)
 
                 messagebox.showinfo("Éxito", "El proyecto fue creado con éxito, verifícalo en el lugar donde decidiste crearlo")
 
@@ -140,7 +140,7 @@ class TkClass(ExtraMethods):
         projectLabelCombo.place(x= 10, y= 180)
 
         # Combobox with options for create a flask or tkinter project.
-        valuesArr= ["tkinter", "flask", "flask_api"]
+        valuesArr= ["tkinter", "flask_web", "flask_api"]
         valComb= tk.StringVar()
         valComb.set(valuesArr[0])
         projectCombo= ttk.Combobox(ven, values= valuesArr, state= "readonly", textvariable= valComb, width= 22)

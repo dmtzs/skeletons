@@ -366,13 +366,13 @@ class Files(Contents):
         with open(temp_path, "wt") as file:
             file.write("/*Your css code here*/")
 
-    def coreFiles(self, project_type, path_to_keep, project_name):
+    def core_files(self, project_type, path_to_keep, project_name):
         self.path_to_keep= path_to_keep
         self.project_name= project_name
 
         if project_type == "tkinter":
             self.tk_files()
-        elif project_type == "flask":
+        elif project_type == "flask_web":
             self.flask_files()
         elif project_type == "flask_api":
             self.flask_api_files()
