@@ -36,13 +36,13 @@ from app import routes, admin_routes'''
         
         cont_routes= '''try:
     from app import app
-    from flask import request, jsonify, make_response
+    from flask import Response, request, jsonify, make_response
 except ImportError as e_imp:
     print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 # -------------Endpoints-------------
 @app.route("/index", methods= ["GET"])
-def index():
+def index() -> Response:
     resp_code = 200
     resp_json = {
         "responseCode": resp_code,
@@ -53,7 +53,7 @@ def index():
 
         cont_adminroutes= '''try:
     from app import app
-    from flask import request, jsonify, make_response
+    from flask import Response, request, jsonify, make_response
     from werkzeug.security import generate_password_hash, check_password_hash
 except ImportError as e_imp:
     print(f"The following import ERROR occurred in {__file__}: {e_imp}")
@@ -62,7 +62,7 @@ except ImportError as e_imp:
 
 # -------------Endpoints-------------
 @app.route("/admin_index", methods= ["GET"])
-def admin_index():
+def admin_index() -> Response:
     resp_code = 200
     resp_json = {
         "responseCode": resp_code,
