@@ -187,8 +187,8 @@ app= Flask(__name__)
 from app import routes, admin_routes'''
         
         cont_routes= '''try:
-    import datetime as dt
     from app import app
+    from datetime import datetime as dt
     from flask import render_template
 except ImportError as e_imp:
     print(f"The following import ERROR occurred in {__file__}: {e_imp}")
@@ -197,7 +197,7 @@ except ImportError as e_imp:
 @app.context_processor
 def dateNow():
     return {
-        "now": dt.datetime.utcnow()
+        "now": dt.utcnow()
     }
 
 # -------------Endpoints-------------
@@ -216,7 +216,7 @@ except ImportError as e_imp:
 
 # -------------Endpoints-------------
 @app.route("/admin")# Admin index HTML template
-def index():
+def index_admin():
     return render_template("welcome.html", pageTitle= "Home")'''
 
         cont_layout_html= '''<!DOCTYPE html>
@@ -241,7 +241,7 @@ def index():
 
     {% block content %}{% endblock %}
 
-    {% include "includes/footers.html" %}
+    {% include "includes/footer.html" %}
     
 </body>
 </html>'''
