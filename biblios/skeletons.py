@@ -7,7 +7,7 @@ class Contents():
     def flask_api_content(self):
         cont_run_app= '''try:
     from app import app
-    from gevent.pywsgi import WSGIServer
+    # from gevent.pywsgi import WSGIServer
 except ImportError as e_imp:
     print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
@@ -18,8 +18,8 @@ if __name__== "__main__":
         # debug= True for apply changes made into the files without restarting the flask server
 
         # -----------------Prod mode----------------
-        #appServer= WSGIServer(("127.0.0.1", 5000), app)
-        #appServer.serve_forever()
+        # appServer= WSGIServer(("127.0.0.1", 5000), app)
+        # appServer.serve_forever()
     except Exception as e_imp:
         print(f"The following import ERROR occurred in {__file__}: {e_imp}")
     finally:
@@ -159,7 +159,7 @@ class TkClass(extraMethods):
     def flask_content(self):
         cont_run_app= '''try:
     from app import app
-    from gevent.pywsgi import WSGIServer
+    # from gevent.pywsgi import WSGIServer
 except ImportError as e_imp:
     print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
@@ -170,8 +170,8 @@ if __name__== "__main__":
         # debug= True for apply changes made into the files without restarting the flask server
 
         # -----------------Prod mode----------------
-        #appServer= WSGIServer(("127.0.0.1", 5000), app)
-        #appServer.serve_forever()
+        # appServer= WSGIServer(("127.0.0.1", 5000), app)
+        # appServer.serve_forever()
     except Exception as e_imp:
         print(f"The following import ERROR occurred in {__file__}: {e_imp}")
     finally:
@@ -189,7 +189,7 @@ from app import routes, admin_routes'''
         cont_routes= '''try:
     from app import app
     from datetime import datetime as dt
-    from flask import render_template
+    from flask import render_template, request
 except ImportError as e_imp:
     print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
@@ -203,7 +203,7 @@ def dateNow():
 # -------------Endpoints-------------
 @app.route("/")# Welcome HTML template
 def index():
-    return render_template("welcome.html", pageTitle= "Home")'''
+    return render_template("welcome.html", page_title="Home")'''
 
         cont_admin_routes= '''try:
     from app import app
@@ -217,7 +217,7 @@ except ImportError as e_imp:
 # -------------Endpoints-------------
 @app.route("/admin")# Admin index HTML template
 def index_admin():
-    return render_template("welcome.html", pageTitle= "Home")'''
+    return render_template("welcome.html", page_title="Home")'''
 
         cont_layout_html= '''<!DOCTYPE html>
 <html lang="en">
@@ -227,7 +227,7 @@ def index_admin():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/bootstrap/css/bootstrap.css')}}" type="text/css" />
-	<link rel="stylesheet" href="{{url_for('static', filename= 'css/PerStyles.css')}}" type="text/css" />
+	<link rel="stylesheet" href="{{url_for('static', filename= 'css/per_styles.css')}}" type="text/css" />
     <title>{% block title %}{% endblock %}</title>
     
 </head>
@@ -236,7 +236,7 @@ def index_admin():
     {% include "includes/navbar.html" %}
 
     {% if imgback %}
-        {% include "includes/backgroundStyle.html" %}
+        {% include "includes/background_style.html" %}
     {% endif %}
 
     {% block content %}{% endblock %}
@@ -362,7 +362,7 @@ class Files(Contents):
                 elif cont== 4:
                     temp_path= f"{main_project_path}/app/static/{elem}"
                     os.makedirs(temp_path)
-        temp_path= f"{main_project_path}/app/static/css/PerStyles.css"
+        temp_path= f"{main_project_path}/app/static/css/per_styles.css"
         with open(temp_path, "wt") as file:
             file.write("/*Your css code here*/")
 
