@@ -41,7 +41,7 @@ except ImportError as e_imp:
     print(f"The following import ERROR occurred in {__file__}: {e_imp}")
 
 # -------------Endpoints-------------
-@app.route("/index", methods= ["GET"])
+@app.route("/index", methods=["GET"])
 def index() -> Response:
     resp_code = 200
     resp_json = {
@@ -61,7 +61,7 @@ except ImportError as e_imp:
 # ------------------Admin routes------------------
 
 # -------------Endpoints-------------
-@app.route("/admin_index", methods= ["GET"])
+@app.route("/admin_index", methods=["GET"])
 def admin_index() -> Response:
     resp_code = 200
     resp_json = {
